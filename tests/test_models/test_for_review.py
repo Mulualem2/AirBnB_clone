@@ -1,25 +1,30 @@
+#!/usr/bin/python3
+"""Test suite for Review class in models.review"""
 import unittest
-from datetime import datetime
-from models import *
+
+from models.base_model import BaseModel
+from models.review import Review
 
 
-class Test_ReviewModel(unittest.TestCase):
-    """
-    Test the review model class
-    """
+class TestReview(unittest.TestCase):
+    
 
     def setUp(self):
-        self.model = Review()
-        self.model.save()
+        self.review = Review()
+        self.attr_list = [
+            "place_id",
+            "user_id",
+            "text"
+        ]
 
-    def test_var_initialization(self):
-        self.assertTrue(hasattr(self.model, "place_id"))
-        self.assertTrue(hasattr(self.model, "user_id"))
-        self.assertTrue(hasattr(self.model, "text"))
-        self.assertEqual(self.model.place_id, "")
-        self.assertEqual(self.model.user_id, "")
-        self.assertEqual(self.model.text, "")
+    def test_review_is_a_subclass_of_basemodel(self):
+        self.assertTrue(issubclass(type(self.review), BaseModel))
 
+    def test_attrs_are_class_attrs(self):
+        for attr in self.attr_list:
+            self.assertTrue(hasattr(self.review, attr))
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_class_attrs(self):
+        for attr in self.attr_list:
+            self.assertIs(type(getattr(self.review, attr)), str)
+            self.assertFalse(bool(getattr(self.review, attr)))
