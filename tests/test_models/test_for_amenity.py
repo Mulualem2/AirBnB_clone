@@ -1,21 +1,22 @@
+#!/usr/bin/python3
+"""Test suite for Amenity class of the models.amenity module"""
 import unittest
-from datetime import datetime
-from models import *
+
+from models.base_model import BaseModel
+from models.amenity import Amenity
 
 
-class Test_AmenityModel(unittest.TestCase):
-    """
-    Test the amenity model class
-    """
+class TestAmenity(unittest.TestCase):
 
     def setUp(self):
-        self.model = Amenity()
-        self.model.save()
+        self.amenity = Amenity()
 
-    def test_var_initialization(self):
-	self.assertTrue(hasattr(self.model, "name"))
-	self.assertEqual(self.model.name, "")
+    def test_amenity_is_a_subclass_of_basemodel(self):
+        self.assertTrue(issubclass(type(self.amenity), BaseModel))
 
+    def test_attr_is_a_class_attr(self):
+        self.assertTrue(hasattr(self.amenity, "name"))
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_class_attr(self):
+        self.assertIs(type(self.amenity.name), str)
+        self.assertFalse(bool(getattr(self.amenity, "name")))
