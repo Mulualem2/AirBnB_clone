@@ -1,6 +1,6 @@
 1.Description of the project,
 
-This team project is part of the Holberton School Full-Stack Software Engineer program. It's the first step towards building a first full web application: an AirBnB clone. This first step consists of a custom command-line interface for data management, and the base classes for the storage of this data, the purpose of this project to recreate the AirBnB site from the back-end data management to the front-end user interface.
+This team project is part of the ALX Full-Stack Software Engineer program. It's the first step towards building a first full web application: an AirBnB clone. This first step consists of a custom command-line interface for data management, and the base classes for the storage of this data, the purpose of this project to recreate the AirBnB site from the back-end data management to the front-end user interface.
 
 Description of the command interpreter:
 
@@ -30,7 +30,7 @@ Non-interactive mode example
 		========================================
 			EOF  all  count  create  destroy  help  quit  show  update
 
-Models
+ Models
 	The folder models contains all the classes used in this project.
 	File 	Description 	Attributes
 	base_model.py 	BaseModel class for all the other classes 	id, created_at, updated_at
@@ -48,5 +48,5 @@ Models
 
 	The init.py file contains the instantiation of the FileStorage class called storage, followed by a call to the method reload() on that instance. This allows the storage to be reloaded automatically at initialization, which recovers the serialized data.
 
-Tests
-  All the code is tested with the unittest module. The test for the classes are in the test_models folder.
+ Tests
+All the code is tested with the unittest module. The test for the classes are in the test_models folder.
