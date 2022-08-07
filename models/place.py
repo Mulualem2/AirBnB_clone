@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from models import *
-
+"""Contains the Place model"""
+from models.base_model import BaseModel
 
 class Place(BaseModel):
     city_id = ""
