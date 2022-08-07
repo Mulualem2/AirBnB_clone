@@ -1,42 +1,39 @@
+#!/usr/bin/python3
+"""Test suite for the Place class of models.place"""
 import unittest
-from datetime import datetime
-from models import *
+
+from models.base_model import BaseModel
+from models.place import Place
 
 
-class Test_PlaceModel(unittest.TestCase):
-    """ 
-    Test the place model class
-    """
+class TestPlace(unittest.TestCase):
 
     def setUp(self):
-        self.model = Place()
-	self.model.save()
+        self.place = Place()
+        self.attr_list = ["name", "user_id", "city_id", "description",
+                          "number_bathrooms", "max_guest", "number_rooms",
+                          "price_by_night", "latitude", "longitude",
+                          "amenity_ids"]
 
-    def test_var_initialization(self):
-        self.assertTrue(hasattr(self.model, "city_id"))
-	self.assertTrue(hasattr(self.model, "user_id"))
-	self.assertTrue(hasattr(self.model, "name"))
-        self.assertTrue(hasattr(self.model, "description"))
-	self.assertTrue(hasattr(self.model, "number_rooms"))
-        self.assertTrue(hasattr(self.model, "number_bathrooms"))
-	self.assertTrue(hasattr(self.model, "max_guest"))
-	self.assertTrue(hasattr(self.model, "price_by_night"))
-	self.assertTrue(hasattr(self.model, "latitude"))
-	self.assertTrue(hasattr(self.model, "longitude"))
-	self.assertTrue(hasattr(self.model, "amenities"))
-        self.assertEqual(self.model.city_id, "")  
-	self.assertEqual(self.model.user_id, "")
+    def test_attrs_are_class_attrs(self):
+        for attr in self.attr_list:
+            self.assertTrue(hasattr(Place, attr))
 
-	self.assertEqual(self.model.name, "")
-	self.assertEqual(self.model.description, "")
-        self.assertEqual(self.model.number_rooms, 0)
-        self.assertEqual(self.model.number_bathrooms, 0)
-        self.assertEqual(self.model.max_guest, 0)
-        self.assertEqual(self.model.price_by_night, 0)
-        self.assertEqual(self.model.latitude, 0.0)
-	self.assertEqual(self.model.longitude, 0.0)
-        self.assertEqual(self.model.amenities, [''])
+    def test_class_attrs(self):
+        self.assertIs(type(self.place.name), str)
+        self.assertIs(type(self.place.city_id), str)
+        self.assertIs(type(self.place.user_id), str)
+        self.assertIs(type(self.place.description), str)
+        self.assertIs(type(self.place.number_bathrooms), int)
+        self.assertIs(type(self.place.max_guest), int)
+        self.assertIs(type(self.place.number_rooms), int)
+        self.assertIs(type(self.place.price_by_night), int)
+        self.assertIs(type(self.place.latitude), float)
+        self.assertIs(type(self.place.longitude), float)
+        self.assertIs(type(self.place.amenity_ids), list)
 
+        for attr in self.attr_list:
+            self.assertFalse(bool(getattr(self.place, attr)))
 
-	if __name__ == "__main__":
-	    unittest.main()
+    def test_place_obj_is_a_subclass_of_basemodel(self):
+        self.assertTrue(issubclass(type(self.place), BaseModel))
